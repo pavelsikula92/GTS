@@ -55,8 +55,15 @@ def gts_engine(m, logg):
     return pd.Series([r_sol, chi, deff, z_ratio])
 
 
-# --- DIRECTORY CONFIGURATION --- 
-DATA_FOLDER = r"C:\Users\xyxy\yxyx"
+# Automatic path detection - looks for the file in the same folder as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+FILE_NAME = "Jimenez-Esteban_2023_1767788491.csv"
+FILE_PATH = os.path.join(script_dir, FILE_NAME)
+
+if not os.path.exists(FILE_PATH):
+    print(f"❌ Critical Error: Data source '{FILE_NAME}' not found in script directory!")
+    print(f"Please ensure the CSV file is located at: {script_dir}")
+    exit()
 
 # List of target catalogs for batch processing
 files = [
