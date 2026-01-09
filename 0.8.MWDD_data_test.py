@@ -62,10 +62,14 @@ def get_gts_omega_metrics(mass_sol, logg):
     return deff, v_gr_einstein, v_gts, c_eff / 1000.0
 
 
-# --- DATA LOADING (Robust MWDD-Safe Approach) ---
-FILE_PATH = r"C:\Users\pavel\Desktop\Kauzální fyzika\MWDD_export.csv"
+# Automatic path detection - looks for the file in the same folder as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+FILE_NAME = "Jimenez-Esteban_2023_1767788491.csv"
+FILE_PATH = os.path.join(script_dir, FILE_NAME)
+
 if not os.path.exists(FILE_PATH):
-    print(f"❌ ERROR: File {FILE_PATH} not found!")
+    print(f"❌ Critical Error: Data source '{FILE_NAME}' not found in script directory!")
+    print(f"Please ensure the CSV file is located at: {script_dir}")
     exit()
 
 # Load and clean headers (standardizing for case-insensitivity and whitespace)
