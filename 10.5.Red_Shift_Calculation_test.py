@@ -150,7 +150,12 @@ def run_master_validation(folder_path):
         return None
 
 
-if __name__ == "__main__":
-    # Configure your data folder path here
-    DATA_PATH = r"C:\Users\pavel\Desktop\Kauzální fyzika"
-    master_data = run_master_validation(DATA_PATH)
+# Automatic path detection - looks for the file in the same folder as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+FILE_NAME = "Jimenez-Esteban_2023_1767788491.csv"
+FILE_PATH = os.path.join(script_dir, FILE_NAME)
+
+if not os.path.exists(FILE_PATH):
+    print(f"❌ Critical Error: Data source '{FILE_NAME}' not found in script directory!")
+    print(f"Please ensure the CSV file is located at: {script_dir}")
+    exit()
